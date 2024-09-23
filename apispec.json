@@ -1,0 +1,227 @@
+{
+    "openapi":"3.0.3",
+    "info": {
+      "title":"Category Restful API",
+      "description":"API For Category",
+      "version":"1.0"
+    },
+    "servers": [
+      {"url":"https://localhost:3000/api"}
+    ],
+    "paths": {
+        "/categories":{
+            "get":{
+                "security": [{
+                    "CategoryAuth":[]
+                }],
+                "tags": ["Category API"],
+                "description": "List All Category",
+                "summary": "List All Category",
+                "responses": {
+                    "200":{
+                        "description": "Success Get All Category",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties": {
+                                        "code":{
+                                            "type": "number"
+                                        },
+                                        "status":{
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "$ref":"#components/schemas/Category"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post":{
+                "security": [{
+                    "CategoryAuth":[]
+                }],
+                "tags": ["Category API"],
+                "description": "Create New Category",
+                "summary": "Create New Category",
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/CreateOrUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success Create Category",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{"type": "number"},
+                                        "status":{"type":"string"},
+                                        "data":{
+                                            "$ref":"#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/{categoryId}":{
+            "get":{
+                "security": [{
+                    "CategoryAuth":[]
+                }],
+                "tags": ["Category API"],
+                "summary": "Get One Category",
+                "description": "Get One Category",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success Get Category",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{"type": "number"},
+                                        "status":{"type": "string"},
+                                        "data":{
+                                            "$ref":"#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put":{
+                "security": [{
+                    "CategoryAuth":[]
+                }],
+                "tags": ["Category API"],
+                "summary": "Update One Category",
+                "description": "Update One Category",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "requestBody":{
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/CreateOrUpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Success Get Category",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{"type": "number"},
+                                        "status":{"type": "string"},
+                                        "data":{
+                                            "$ref":"#/components/schemas/Category"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":{
+                "security": [{
+                    "CategoryAuth":[]
+                }],
+                "tags": ["Category API"],
+                "summary": "Delete One Category",
+                "description": "Delete One Category",
+                "parameters": [
+                    {
+                        "name": "categoryId",
+                        "in": "path",
+                        "description": "Category ID"
+                    }
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success Delete Category",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "code":{"type": "number"},
+                                        "status":{"type": "string"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "CategoryAuth":{
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-API-KEY",
+                "description": "Authentication for Category API"
+            }
+        },
+        "schemas": {
+            "CreateOrUpdateRequest":{
+                "type": "object",
+                "properties": {
+                    "name":{
+                        "type": "string"
+                    }
+                }
+            },
+            "Category":{
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "type": "number"
+                    },
+                    "name":{
+                        "type": "string"
+                    },
+                    "test":{"type": "number"}
+                }
+            }
+        }
+    }
+  }
